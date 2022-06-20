@@ -1,0 +1,11 @@
+/svastha/bin
+/svastha/obj
+/svastha/pkg
+/PhysicalActivity/bin
+/PhysicalActivity/obj
+/PhysicalActivity/pkg
+/PhysicalActivity/ClientApp/dist
+/PhysicalActivity/ClientApp/node_modules
+/.vs
+/svastha/PublishProfiles/Cloud.xml
+/packages
