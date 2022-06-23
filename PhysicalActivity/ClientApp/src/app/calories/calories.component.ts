@@ -6,18 +6,17 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './calories.component.html'
 })
 export class CaloriesComponent {
-  public forecasts: WeatherForecast[];
+  public calories: Calorie[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-      this.forecasts = result;
+    http.get<Calorie[]>(baseUrl + 'api/SampleData/Daily').subscribe(result => {
+      this.calories = result;
     }, error => console.error(error));
   }
 }
 
-interface WeatherForecast {
+interface Calorie {
   dateFormatted: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+  id: number;
+  count: number;
 }
