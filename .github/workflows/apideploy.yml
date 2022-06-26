@@ -9,3 +9,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Write output
+        shell: pwsh
+        run: |
+          write-output 'test output line'
