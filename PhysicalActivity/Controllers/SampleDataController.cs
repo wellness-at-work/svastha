@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using PhysicalActivity.Models;
 
 namespace PhysicalActivity.Controllers
 {
@@ -32,7 +33,7 @@ namespace PhysicalActivity.Controllers
 
         };
 
-        [HttpGet(nameof(Daily)]
+        [HttpGet(nameof(Daily))]
         public IEnumerable<Calorie> Daily()
         {
             var calories = new List<Calorie>();
@@ -49,13 +50,6 @@ namespace PhysicalActivity.Controllers
             }
 
             return calories;
-        }
-
-        public class Calorie
-        {
-            public string DateFormatted { get; set; }
-            public int Id { get; set; }
-            public int Count { get; set; }
-        }
+        } 
     }
 }

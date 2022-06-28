@@ -61,6 +61,8 @@ namespace PhysicalActivity
                 //    spa.UseAngularCliServer(npmScript: "start");
                 //}
             });
+
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
         }
     }
 }
