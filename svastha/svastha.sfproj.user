@@ -3,7 +3,7 @@
   <PropertyGroup>
     <ApplicationUrl />
     <IsStartupProjectCheckComplete>true</IsStartupProjectCheckComplete>
-    <LaunchTarget>..\PhysicalActivity\PhysicalActivity.csproj</LaunchTarget>
+    <LaunchTarget>..\WebServer\WebServer.csproj</LaunchTarget>
     <LastServiceLocation />
   </PropertyGroup>
 </Project>

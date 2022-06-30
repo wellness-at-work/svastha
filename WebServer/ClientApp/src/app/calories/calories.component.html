@@ -1,0 +1,24 @@
+<h1>Calories</h1>
+
+<h2 class="code-header">Front end</h2>
+<ngx-gist [gistId]="'tarikub/3fc234e5f1890717587378a4fc1085fe'"></ngx-gist>
+
+<h2 class="code-header">Proxy call </h2>
+<ngx-gist [gistId]="'tarikub/148b728a43cdb3c053290c9914b6f29a'"></ngx-gist>
+
+<table class='table' *ngIf="calories">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Id</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let calorie of calories">
+      <td>{{ calorie.dateFormatted }}</td>
+      <td>{{ calorie.id }}</td>
+      <td>{{ calorie.count }}</td>
+    </tr>
+  </tbody>
+</table>
