@@ -49,6 +49,9 @@ jobs:
     runs-on: windows-2019
     needs: build
     steps:
+      - name: Setup Artifacts folder
+        run: New-Item .\artifacts -ItemType Directory
+        
       - name: Download Artifacts
         uses: actions/download-artifact@v3
         with:
