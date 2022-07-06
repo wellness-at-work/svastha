@@ -60,11 +60,12 @@ jobs:
       
       - name: Unzip artifacts
         run: | 
-          New-Item .\pkg -ItemType Directory
-          Expand-Archive -Path .\artifacts\SF_Artifacts.Zip -DestinationPath .\pkg
+          ls .\artifacts
+          #New-Item .\pkg -ItemType Directory
+          #Expand-Archive -Path .\artifacts\SF_Artifacts.Zip -DestinationPath .\pkg
       
-      - name: Validate Artifacts
-        run: ls .\pkg R
+      #- name: Validate Artifacts
+      #  run: ls .\pkg R
           
       #- name: Deploy ServiceFabric Application
       #  run: ./deploy/build_deploy.ps1
