@@ -32,7 +32,7 @@ namespace PhysicalActivity.Controllers
 
         };
 
-        [HttpGet(nameof(Daily)]
+        [HttpGet(nameof(Daily))]
         public IEnumerable<Calorie> Daily()
         {
             var calories = new List<Calorie>();
