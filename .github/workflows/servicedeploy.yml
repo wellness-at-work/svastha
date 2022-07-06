@@ -73,7 +73,7 @@ jobs:
       env_name: qa
     steps:
       - name: Display Env
-        run: echo "The API key is:${{env.API_KEY}}" 
+        run: echo "The API key is:${{env.env_name}}" 
 
           
       #- name: Deploy ServiceFabric Application
