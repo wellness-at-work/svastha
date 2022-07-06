@@ -46,11 +46,11 @@ jobs:
           name: SF_Artifacts
           path: .\artifacts
           retention-days: 1
-          
+
   Dev-Deploy:
     name: Deploy Application
     runs-on: windows-2019
-    needs: build
+    needs: Dev-Build
     steps:
       - name: Setup Artifacts folder
         run: New-Item .\artifacts -ItemType Directory
@@ -70,7 +70,7 @@ jobs:
   Production:
     name: Prod deployment
     runs-on: windows-2019
-    needs: deploy
+    needs: Dev-Deploy
     environment: PROD
     env:
       env_name: prod
