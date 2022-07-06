@@ -3,7 +3,9 @@ $envObj = Get-Content -Path .\build_deploy\env.json | ConvertFrom-Json | Select-
 
 New-Item .\pkg -ItemType Directory
 
-Copy-Item .\ApplicationPackageRoot\ApplicationManifest.xml -Destination .\pkg
+ls .\ApplicationPackageRoot
+
+Copy-Item .\svastha\ApplicationPackageRoot\ApplicationManifest.xml -Destination .\pkg
 
 foreach($application in $envObj.$env.applicationNames){
 
