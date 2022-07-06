@@ -65,7 +65,7 @@ jobs:
           Expand-Archive -LiteralPath .\artifacts\sfartifact.Zip -DestinationPath .\pkg -Force
       
       - name: Validate Artifacts
-        run: ls .\pkg 
+        run: ls .\pkg\pkg 
           
       #- name: Deploy ServiceFabric Application
       #  run: ./deploy/build_deploy.ps1
