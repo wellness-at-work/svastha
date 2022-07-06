@@ -61,8 +61,19 @@ jobs:
       - name: Unzip artifacts
         run:  Expand-Archive -LiteralPath .\artifacts\sfartifact.Zip -DestinationPath .\artifacts -Force
       
-      - name: Validate Artifacts
-        run: ls .\artifacts 
+      - name: Deploy Artifacts
+        run: ls .\artifacts
+
+  QA:
+    name: QA deployment
+    runs-on: windows-2019
+    needs: deploy
+    env:
+      env_name: qa
+    steps:
+      - name: Display Env
+        run: Write-Host "$env_name"  
+
           
       #- name: Deploy ServiceFabric Application
       #  run: ./deploy/build_deploy.ps1
