@@ -73,7 +73,7 @@ jobs:
       env_name: qa
     steps:
       - name: Display Env
-        run: Write-Host $env.env_name 
+        run: echo "The API key is:${{env.API_KEY}}" 
 
           
       #- name: Deploy ServiceFabric Application
