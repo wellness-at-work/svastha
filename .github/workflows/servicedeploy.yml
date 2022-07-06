@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Powershell-Test
+name: Dev-Build-Publish
 
 # Controls when the workflow will run
 on:
@@ -8,8 +8,8 @@ on:
   push:
     branches: [ "development" ]
   pull_request:
-    branches: [ "development ]
-  
+    branches: [ "development" ]
+    
   # Allows you to run this workflow manually from the Actions tab
   #workflow_dispatch:
 
@@ -17,11 +17,9 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   build:
+    name: Build Application
     # The type of runner that the job will run on
-    runs-on: windows-2019
-    
-    environment: Dev 
-
+    runs-on: windows-2019    
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -33,15 +31,33 @@ jobs:
             3.1.x
      
       - name: Package SFApplication
-        run: ./deploy/Package.ps1 -env_name ${{ secrets.ENV_NAME }}
+        run: ./deploy/Package.ps1
       
         
       - uses: actions/upload-artifact@master
         with:
-          name: SF Artifacts
-          path: ./artifacts
+          name: SF_Artifacts
+          path: .\artifacts
           retention-days: 1
+  deploy:
+    name: Deploy Application
+    runs-on: windows-2019
+    needs: build
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: SF_Artifacts
+          path: .\artifacts
       
+      - name: Unzip artifacts
+        run: | 
+          New-Item .\pkg -ItemType Directory
+          Expand-Archive -Path .\artifacts\SF_Artifacts.Zip -DestinationPath .\pkg
+      
+      - name: Validate Artifacts
+        run: ls .\pkg R
+          
       #- name: Deploy ServiceFabric Application
       #  run: ./deploy/build_deploy.ps1
         
