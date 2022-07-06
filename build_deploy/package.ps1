@@ -1,5 +1,10 @@
-$env="dev"
-$envObj = Get-Content -Path .\build_deploy\env.json | ConvertFrom-Json | Select-Object -ExpandProperty "Environment" | Select-Object $env
+param(
+    [Parameter(Mandatory=$true)]
+    [string] $env_name
+)
+
+Write-Host "Env Name:" $env_name
+$envObj = Get-Content -Path .\build_deploy\env.json | ConvertFrom-Json | Select-Object -ExpandProperty "Environment" | Select-Object $env_name
 
 New-Item .\pkg -ItemType Directory
 

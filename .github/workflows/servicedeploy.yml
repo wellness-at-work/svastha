@@ -19,7 +19,9 @@ jobs:
   build:
     name: Build Application
     # The type of runner that the job will run on
-    runs-on: windows-2019    
+    runs-on: windows-2019
+    env:
+      env_name: dev    
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -36,7 +38,7 @@ jobs:
             3.1.x
      
       - name: Package SFApplication
-        run: ./build_deploy/Package.ps1
+        run: .\build_deploy\Package.ps1 -env_name ${{env.env_name}}
       
         
       - uses: actions/upload-artifact@master
@@ -72,8 +74,17 @@ jobs:
     env:
       env_name: qa
     steps:
-      - name: Display Env
-        run: Write-Host "The API key is:${{env.env_name}}" 
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: SF_Artifacts
+          path: .\artifacts
+      
+      - name: Unzip artifacts
+        run:  Expand-Archive -LiteralPath .\artifacts\sfartifact.Zip -DestinationPath .\artifacts -Force
+      
+      - name: Deploy Artifacts
+        run: ls .\artifacts 
 
           
       #- name: Deploy ServiceFabric Application
