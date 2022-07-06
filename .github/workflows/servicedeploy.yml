@@ -68,6 +68,7 @@ jobs:
     name: QA deployment
     runs-on: windows-2019
     needs: deploy
+    environment: QA
     env:
       env_name: qa
     steps:
