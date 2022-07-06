@@ -72,7 +72,7 @@ jobs:
       env_name: qa
     steps:
       - name: Display Env
-        run: Write-Host "$env_name"  
+        run: Write-Host $env.env_name 
 
           
       #- name: Deploy ServiceFabric Application
