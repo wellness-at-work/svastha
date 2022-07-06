@@ -5,7 +5,7 @@ New-Item .\pkg -ItemType Directory
 
 ls .\svastha
 
-#Copy-Item .\svastha\ApplicationPackageRoot\ApplicationManifest.xml -Destination .\pkg
+Copy-Item .\svastha\ApplicationPackageRoot\ApplicationManifest.xml -Destination .\pkg
 
 #foreach($application in $envObj.$env.applicationNames){
 
