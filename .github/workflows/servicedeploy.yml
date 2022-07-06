@@ -59,13 +59,10 @@ jobs:
           path: .\artifacts
       
       - name: Unzip artifacts
-        run: |
-          ls .\artifacts
-          New-Item .\pkg -ItemType Directory
-          Expand-Archive -LiteralPath .\artifacts\sfartifact.Zip -DestinationPath .\pkg -Force
+        run:  Expand-Archive -LiteralPath .\artifacts\sfartifact.Zip -DestinationPath .\artifacts -Force
       
       - name: Validate Artifacts
-        run: ls .\pkg\pkg 
+        run: ls .\artifacts 
           
       #- name: Deploy ServiceFabric Application
       #  run: ./deploy/build_deploy.ps1
