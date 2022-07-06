@@ -1,0 +1,7 @@
+{
+  "sourceApimName": "apim-svastha-dev",
+  "destinationApimName": "apim-svastha",
+  "resourceGroup": "ODL-Hackathon-624869",
+  "fileFolder": "C:/dev/svastha/templates",
+  "apiName": "Calories"
+}
