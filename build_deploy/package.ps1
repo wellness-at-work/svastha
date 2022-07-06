@@ -3,14 +3,13 @@ param(
     [string] $env_name
 )
 
-Write-Host "Env Name:" $env_name
 $envObj = Get-Content -Path .\build_deploy\env.json | ConvertFrom-Json | Select-Object -ExpandProperty "Environment" | Select-Object $env_name
 
 New-Item .\pkg -ItemType Directory
 
 Copy-Item .\svastha\ApplicationPackageRoot\ApplicationManifest.xml -Destination .\pkg
 
-foreach($application in $envObj.$env.applicationNames){
+foreach($application in $envObj.$env_name.applicationNames){
 
     New-Item .\pkg\$application"pkg" -ItemType Directory
     New-Item .\pkg\$application"pkg"\Code -ItemType Directory
