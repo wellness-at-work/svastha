@@ -16,8 +16,8 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  Dev-Build:
-    name: Build Application
+  build:
+    name: Dev Build
     # The type of runner that the job will run on
     runs-on: windows-2019
     env:
@@ -47,10 +47,10 @@ jobs:
           path: .\artifacts
           retention-days: 1
 
-  Dev-Deploy:
-    name: Deploy Application
+  deploy:
+    name: Dev Deployment
     runs-on: windows-2019
-    needs: Dev-Build
+    needs: build
     steps:
       - name: Setup Artifacts folder
         run: New-Item .\artifacts -ItemType Directory
@@ -68,9 +68,9 @@ jobs:
         run: ls .\artifacts
 
   Production:
-    name: Prod deployment
+    name: Production Deploy
     runs-on: windows-2019
-    needs: Dev-Deploy
+    needs: deploy
     environment: PROD
     env:
       env_name: prod
