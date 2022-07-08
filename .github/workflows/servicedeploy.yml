@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Dev-Build-Publish
+name: Build-Publish
 
 # Controls when the workflow will run
 on:
