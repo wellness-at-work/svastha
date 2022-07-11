@@ -1,0 +1,93 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build-Publish
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "development" ]
+  pull_request:
+    branches: [ "development" ]
+    
+  # Allows you to run this workflow manually from the Actions tab
+  #workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    name: Dev Build
+    # The type of runner that the job will run on
+    runs-on: windows-2019
+    env:
+      env_name: "dev"
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      
+      - uses: actions/setup-node@v3
+        with:
+            node-version: 14.15.0
+            
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: |
+            3.1.x
+     
+      - name: Package SFApplication
+        run: .\build_deploy\Package.ps1 -env_name ${{env.env_name}}
+      
+        
+      - uses: actions/upload-artifact@master
+        with:
+          name: SF_Artifacts
+          path: .\artifacts
+          retention-days: 1
+
+  deploy:
+    name: Dev Deployment
+    runs-on: windows-2019
+    needs: build
+    steps:
+      - name: Setup Artifacts folder
+        run: New-Item .\artifacts -ItemType Directory
+        
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: SF_Artifacts
+          path: .\artifacts
+      
+      - name: Unzip artifacts
+        run:  Expand-Archive -LiteralPath .\artifacts\sfartifact.Zip -DestinationPath .\artifacts -Force
+      
+      - name: Deploy Artifacts
+        run: ls .\artifacts
+
+  Production:
+    name: Production Deploy
+    runs-on: windows-2019
+    needs: deploy
+    environment: PROD
+    env:
+      env_name: prod
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: SF_Artifacts
+          path: .\artifacts
+      
+      - name: Unzip artifacts
+        run:  Expand-Archive -LiteralPath .\artifacts\sfartifact.Zip -DestinationPath .\artifacts -Force
+      
+      - name: Deploy Artifacts
+        run: ls .\artifacts 
+
+          
+      #- name: Deploy ServiceFabric Application
+      #  run: ./deploy/build_deploy.ps1
+        
